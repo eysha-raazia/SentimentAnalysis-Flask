@@ -8,15 +8,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
       - name: Build and Push Docker Image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: |
-          docker build -t $DOCKER_USERNAME/mlops-tasks .
+          docker build -t buildimg:latest -f Dockerfile .
+          docker tag buildimg:latest $DOCKER_USERNAME/mlops-tasks:latest
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker push $DOCKER_USERNAME/mlops-tasks
+          docker push $DOCKER_USERNAME/mlops-tasks:latest
       
