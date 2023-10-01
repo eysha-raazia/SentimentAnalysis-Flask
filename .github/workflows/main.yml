@@ -11,20 +11,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Build Image
-        run: docker build -t myimg .
-
-      - name: Rename Img
-        run: docker tag myimg eysha-raazia/mlops-tasks/myimg
-
       - name: Build and Push Docker Image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: |
           docker buildx create --use
-          docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_USERNAME/myimg:latest -t $DOCKER_USERNAME/myimg:$GITHUB_SHA .
+          docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_USERNAME/mlops-tasks/myimg:latest -t $DOCKER_USERNAME/mlops-tasks/myimg:$GITHUB_SHA .
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker push $DOCKER_USERNAME/myimg:latest
-          docker push $DOCKER_USERNAME/myimg:$GITHUB_SHA
+          docker push $DOCKER_USERNAME/mlops-tasks/myimg:latest
+          docker push $DOCKER_USERNAME/mlops-tasks/myimg:$GITHUB_SHA
       
