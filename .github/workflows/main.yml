@@ -9,11 +9,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Image
-        run: docker build -t myImg .
+        run: docker build -t myimg .
 
       - name: Push on DockerHub
-        run: docker tag myImg eysha-raazia/mlops-tasks/myImg
+        run: docker tag myimg eysha-raazia/mlops-tasks/myimg
 
       - name: Push
-        run: docker push eysha-raazia/mlops-tasks/myImg
+        run: docker push eysha-raazia/mlops-tasks/myimg
       
