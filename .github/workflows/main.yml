@@ -17,8 +17,12 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: |
           docker buildx create --use
-          docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_USERNAME/mlops-tasks/myimg:latest -t $DOCKER_USERNAME/mlops-tasks/myimg:$GITHUB_SHA .
+          docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_USERNAME/myimg:latest -t $DOCKER_USERNAME/myimg:$GITHUB_SHA .
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker push $DOCKER_USERNAME/mlops-tasks/myimg:latest
-          docker push $DOCKER_USERNAME/mlops-tasks/myimg:$GITHUB_SHA
+          echo "after login"
+          docker tag myimg eysharaazia/myimg
+          echo "After tagging"
+          docker push $DOCKER_USERNAME/myimg:latest
+          echo "After latest push"
+          docker push $DOCKER_USERNAME/myimg:$GITHUB_SHA
       
