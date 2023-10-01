@@ -14,6 +14,8 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: |
           docker build -t buildimg:latest -f Dockerfile .
+          echo "$DOCKER_USERNAME"
+          print($DOCKER_USERNAME)
           docker tag buildimg:latest $DOCKER_USERNAME/mlops-tasks:latest
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push $DOCKER_USERNAME/mlops-tasks:latest
