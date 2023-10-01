@@ -1,0 +1,19 @@
+name: DockerHub-auto
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build Image
+        run: docker build -t myImg
+
+      - name: Push on DockerHub
+        run: docker tag myImg eysha-raazia/mlops-tasks/myImg
+
+      - name: Push
+        run: docker push eysha-raazia/mlops-tasks/myImg
+      
