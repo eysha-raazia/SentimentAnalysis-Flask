@@ -1,0 +1,17 @@
+pipeline {
+  agent any {
+    stages {
+      stage('checkout') {
+        steps {
+          git branch:'master', url:'https://github.com/eysha-raazia/SentimentAnalysis-Flask.git'
+        }
+      }
+      stage('Build') {
+        steps {
+          sh 'echo Builing!'
+          sh 'pip install -r requirements.txt'
+        }
+      }
+    }
+  }
+}
