@@ -6,18 +6,24 @@ pipeline {
     stages {
       stage('checkout') {
         steps {
-          file.checkout()
+          script {
+            file.checkout()
+          }
         }
       }
       stage('Build') {
         steps {
-          file.build()
+          script {
+            file.build()
+          }
         }
       }
       
       stage('Deploy') {
         steps {
-          file.deploy()
+          script {
+            file.deploy()
+          }
         }
       }
     }
