@@ -1,15 +1,23 @@
 pipeline {
   agent any
+  script {
+    def file = load 'func.groovy'
+  }
     stages {
       stage('checkout') {
         steps {
-          git branch:'master', url:'https://github.com/eysha-raazia/SentimentAnalysis-Flask.git'
+          file.checkout()
         }
       }
       stage('Build') {
         steps {
-          echo 'Builing!'
-          bat 'pip install -r requirements.txt'
+          file.build()
+        }
+      }
+      
+      stage('Deploy') {
+        steps {
+          file.deploy()
         }
       }
     }
