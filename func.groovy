@@ -3,7 +3,7 @@ def void checkout(){
 }
 
 def void build(){
-  bat 'pip install requirements.txt'
+  bat 'pip install -r requirements.txt'
 }
 
 def void deploy(){
