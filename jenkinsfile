@@ -1,12 +1,10 @@
 pipeline {
   agent any
-  script {
-    def file = load 'func.groovy'
-  }
     stages {
       stage('checkout') {
         steps {
           script {
+            def file = load 'func.groovy'
             file.checkout()
           }
         }
@@ -14,6 +12,7 @@ pipeline {
       stage('Build') {
         steps {
           script {
+            def file = load 'func.groovy'
             file.build()
           }
         }
@@ -22,6 +21,7 @@ pipeline {
       stage('Deploy') {
         steps {
           script {
+            def file = load 'func.groovy'
             file.deploy()
           }
         }
